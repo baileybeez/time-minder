@@ -13,6 +13,9 @@ const config = {
       pwd: "password",
       database: "database_to_use"
    },
+   session: {
+      secret: "your-session-secret"
+   },
    root_dir: ""
 }
 

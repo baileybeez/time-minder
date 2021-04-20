@@ -14,6 +14,7 @@ function LoginRoutes(app, db) {
          if (set.length == 0 || set[0].Pin !== pin) {
             issueAuthFailure(res, email)
          } else {
+            req.session.user = set[0]
             res.redirect('/')
          }
       }).catch (err => {

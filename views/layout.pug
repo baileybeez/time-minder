@@ -9,7 +9,9 @@ html
       script(crossorigin, src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js')
       script(type='module', src='./js/core.js')
    body
-      .header TimeMinder
+      .header 
+         img(src='./img/timeclock.png')
+         .title TimeMinder
       #nav-bar
          ul(class='nav-left')
             li(class='nav-item', action='/') Home 
@@ -22,5 +24,7 @@ html
 
       block content
 
-      .footer by BaileyBeez, 2021
+      .footer 
+         | by BaileyBeez, 2021
+         br
          a(href='https://github.com/baileybeez/') https://github.com/baileybeez/

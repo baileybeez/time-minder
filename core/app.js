@@ -1,6 +1,8 @@
 //
 
 const express = require('express')
+const session = require("express-session")
+const memCached = require("connect-memcached")(session)
 const http = require('http')
 const fs = require('fs/promises')
 const path = require('path')
@@ -14,6 +16,7 @@ class App {
    constructor() {
       this._app = null     
       this._db = null
+      this._store = null
    }
 
    init(config) {
@@ -52,6 +55,7 @@ class App {
                   fnc(this._app, this._db)
                })
 
+               this._app.get('/favicon.ico', (req, res) => res.status(204))
                this._app.use(function (req, res, next) {
                   var err = new Error('not found')
                   err.status = 404
@@ -72,6 +76,13 @@ class App {
       this._app.use(express.urlencoded({ extended: false }))
       this._app.use(cookieParser())
       this._app.use(express.static(path.join(this._config.root_dir, 'public')))
+      this._app.use(session({
+         secret: this._config.session.secret,
+         key: "SESSION",
+         proxy: "true",
+         resave: false,
+         saveUninitialized: false
+      }))
    }
 
    setupViewEngine() {
