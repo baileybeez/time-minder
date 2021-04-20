@@ -2,20 +2,17 @@
 
 const express = require('express')
 const http = require('http')
+const fs = require('fs/promises')
 const path = require('path')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 
-const RouteParser = require("./route-parser")
-
 const DB = require("../entity_framework/dbcontext")
 const Employee = require("./model/employee")
-const { db } = require('../config-example')
 
 class App {
    constructor() {
       this._app = null     
-      this._router = null
       this._db = null
    }
 
@@ -27,15 +24,7 @@ class App {
          this._db.testConnection().then(ret => {
             this.initializeDataModel()
             this.initializeApp()
-
-            const parser = new RouteParser()
-            parser.setupRoutes(this).then(ok => {
-               this._app.use(function (req, res, next) {
-                  var err = new Error('not found')
-                  err.status = 404
-                  next(err)
-               })
-
+            this.initializeRoutes().then(ok => {
                resolve(true)
             }).catch (err => reject(err))                        
          }).catch (err => reject(err))
@@ -53,16 +42,36 @@ class App {
       this.setupAppOptions()
    }
 
+   initializeRoutes() {
+      return new Promise((resolve, reject) => {
+         try {
+            fs.readdir(path.join(__dirname, "routes")).then(fileList => {
+               fileList.forEach(file => {
+                  console.log(`- applying routes from '${file}'`)
+                  const fnc = require(`./routes/${file}`)
+                  fnc(this._app, this._db)
+               })
+
+               this._app.use(function (req, res, next) {
+                  var err = new Error('not found')
+                  err.status = 404
+                  next(err)
+               })
+
+               resolve(true)
+            }).catch (err => reject(err))
+         } catch (err) { 
+            reject(err)  
+         }
+      })
+   }
+
    setupAppOptions() {
       this._app.use(logger('dev'))
       this._app.use(express.json())
       this._app.use(express.urlencoded({ extended: false }))
       this._app.use(cookieParser())
       this._app.use(express.static(path.join(this._config.root_dir, 'public')))
-   }
-
-   setupRoutes(fnc) {
-      fnc(this._app, this._db)
    }
 
    setupViewEngine() {
