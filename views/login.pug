@@ -1,0 +1,17 @@
+//- Login 
+//- 
+extends layout 
+
+block content 
+   form#login-form(action='/login', method='post')
+      .login-row 
+         label(for='email') Email 
+         input(type='textbox', name='email', autofocus, value=email) 
+      .login-row 
+         label(for='pin') Pin 
+         input(type='password', name='pin')
+      .login-bottom-row
+         button#btnLogin(type='submit') Login
+
+      if !auth
+         .error= message

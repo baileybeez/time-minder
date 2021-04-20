@@ -1,0 +1,9 @@
+# nodejs/yarn stuff
+node_modules
+yarn.lock
+
+# imported libraries
+entity_framework
+
+# config/secrets
+config.js
