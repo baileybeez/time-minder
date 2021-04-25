@@ -1,7 +1,7 @@
 {
    "name": "time-minder",
    "version": "0.1",
-   "description": "fullstack javascript timeclock webapp",
+   "description": "full stack javascript timeclock webapp with support for an MSSQL database",
    "author": {
       "name": "BaileyBeez",
       "email": "thebaileybeez@gmail.com"
