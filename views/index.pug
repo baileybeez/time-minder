@@ -2,4 +2,47 @@
 //- 
 extends layout 
 
+mixin timeClockRow (start, finish, desc)
+   tr 
+      td(class='tOpt') &nbsp;
+      td(class='tTime')= start
+      td(class='tTime')= finish
+      td(class='tDesc')= desc
+
+
 block content  
+   if user != null 
+      script(type='text/javascript') 
+         | var timeIn = '#{user.clockInTime}'
+         | var timeTally = #{span}
+
+      .section    
+         .empName Welcome, #{user.Name}
+      
+      .section   
+         .section-half
+            .title Time Card 
+            .prevSegments 
+               table
+                  thead
+                     +timeClockRow("Start", "Finish", "Description")
+                  tbody
+                     each ws in user.segments
+                        +timeClockRow(ws.startTime, ws.finishTime, ws.Description)
+                     tr(class='tTally')
+                        td &nbsp;
+                        td(colspan='2') Total Hours
+                        td#workTally
+      
+         .section-half
+            #clock
+               #clockIn(class='clockControl')
+                  .btn(action='clock-in') 
+                     .btn-label Clock In
+               #clockOut(class='clockControl')
+                  .btn(action='clock-out')
+                     .btn-label Clock Out 
+                  #workTime 
+                  .actionRow
+                     input(type='text', id='segDesc', placeholder='task description (optional)')
+                     .btn(action='apply-desc') Set

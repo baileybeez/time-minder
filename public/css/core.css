@@ -88,8 +88,112 @@ html {
    margin-top: 10px;
 }
 
-#login-form .error::before,#login-form .error::after {
-   content: '**'
+.section {
+   width: calc(100% - 20px);
+   margin-top: 10px;
+   padding: 10px;
+}
+
+.section-half {
+   width: calc(50% - 10px);
+   margin: 0px 5px 0px 0px;
+   display: inline-block;
+   vertical-align: top;
+}
+
+.prevSegments table {
+   width: 100%;
+}
+
+.prevSegments table thead {
+   border-bottom: solid 1px #444;
+}
+
+.prevSegments tOpt {
+   width: 40px;
+}
+
+.prevSegments .tTime {
+   width: 80px;
+}
+
+.prevSegments .tDesc {
+   width: auto;
+}
+
+.prevSegments .tTally {
+   font-weight: bold;
+   line-height: 2.5;
+}
+
+#clockIn, #clockOut {
+   margin-top: 40px;
+}
+
+.clockControl {
+   display :none;
+   width: 300px;
+   margin: 0px auto;
+   text-align: center;
+}
+
+#clock .btn {
+   width: 100px;
+   height: 120px;
+   align-items: center;
+   display: flex;
+   margin: 0px auto;
+   border-radius: 70px;
+}
+
+#clock .btn-label {
+   display: inline-block;
+   text-align: center;
+   margin: 0px auto;
+}
+
+#workTime {
+   margin: 30px;
+}
+
+.actionRow {
+   width: 100%;
+   position: relative;
+}
+
+.actionRow .btn {
+   position: absolute;
+   margin-top: 5px;
+   right: 0px;
+   min-width: 50px;
+   width: 50px !important;
+   height: 20px !important;
+   margin-top: 5px !important;
+   padding: 0px 5px;
+   font-size: .75em;
+   line-height: 20px;
+   border-radius: 5px !important;
+}
+
+#segDesc {
+   width: 100%;
+}
+
+.btn {
+   width: auto;
+   border: solid 1px #bbb;
+   padding: 0px 10px;
+   line-height: 30px;
+   height: auto;
+   display: inline-block;
+   font-size: 1em;
+   cursor: pointer;
+   min-width: 70px;
+   text-align:center;
+   background: -moz-linear-gradient(top, #ffffff 0%, #eeeeee 0%);
+   background: -webkit-linear-gradient(top, #ffffff 0%, #eeeeee 0%);
+   background: linear-gradient(top, #ffffff 0%, #eeeeee 0%);
+   border-radius: 5px;
 }
 
 .footer {

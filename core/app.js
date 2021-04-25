@@ -2,21 +2,24 @@
 
 const express = require('express')
 const session = require("express-session")
-const memCached = require("connect-memcached")(session)
 const http = require('http')
 const fs = require('fs/promises')
 const path = require('path')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 
+const UserManager = require('./userManager')
+
 const DB = require("../entity_framework/dbcontext")
 const Employee = require("./model/employee")
+const WorkSegment = require('./model/worksegment')
 
 class App {
    constructor() {
       this._app = null     
       this._db = null
       this._store = null
+      this._userMgr = new UserManager()
    }
 
    init(config) {
@@ -36,6 +39,7 @@ class App {
 
    initializeDataModel() {
       this._db.registerClass(Employee)
+      this._db.registerClass(WorkSegment)
    }
 
    initializeApp() {
@@ -52,7 +56,7 @@ class App {
                fileList.forEach(file => {
                   console.log(`- applying routes from '${file}'`)
                   const fnc = require(`./routes/${file}`)
-                  fnc(this._app, this._db)
+                  fnc(this, this._app, this._db)
                })
 
                this._app.get('/favicon.ico', (req, res) => res.status(204))
@@ -95,6 +99,10 @@ class App {
       server.listen(this._config.node.port, () => { 
          console.log(`listening on port ${this._config.node.port} ... `)
       })
+   }
+
+   getUserManager() {
+      return this._userMgr
    }
 }
 

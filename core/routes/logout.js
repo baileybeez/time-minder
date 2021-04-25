@@ -1,7 +1,7 @@
 
-function LogoutRoutes(app, db) {
-   app.get('/logout', (req, res) => {
-      req.session.user = null
+function LogoutRoutes(app, express, db) {
+   express.get('/logout', (req, res) => {
+      req.session.userId = 0
       res.redirect('/')
    })
 }
