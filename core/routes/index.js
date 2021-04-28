@@ -4,12 +4,11 @@ function IndexRoutes(app, express, db) {
       const user = app.getUserManager().get(req.session.userId || 0)
       let ts = 0
       if (user != null && user.segments.length > 0) {
-         const span = user.segments.reduce((a, i) => { 
-            a.start = a.start == undefined || i.Start < a.start ? i.Start : a.start
-            a.finish = a.finish == undefined || i.Finish > a.finish ? i.Finish : a.finish
-            return a
-         }, {})
-         ts = (span.finish - span.start) / 1000
+         user.segments.forEach(seg => {
+            if (seg.Finish != null) {
+               ts += (seg.Finish - seg.Start) / 1000
+            }               
+         })
       }
       
       res.render('index', { user: user, span: ts })
