@@ -101,6 +101,14 @@ html {
    vertical-align: top;
 }
 
+.section-sbs {
+   width: calc(33% - 10px);
+   min-width: 375px;
+   margin: 0px 5px 0px 0px;
+   display: inline-block;
+   vertical-align: top;
+}
+
 .prevSegments table {
    width: 100%;
 }
@@ -127,7 +135,7 @@ html {
 }
 
 #clockIn, #clockOut {
-   margin-top: 40px;
+   margin-top: 0px;
 }
 
 .clockControl {
@@ -194,6 +202,46 @@ html {
    background: -webkit-linear-gradient(top, #ffffff 0%, #eeeeee 0%);
    background: linear-gradient(top, #ffffff 0%, #eeeeee 0%);
    border-radius: 5px;
+}
+
+.weekOpt {
+   width: 32px;
+   height: 32px;
+   display: inline-block;
+   font-size: 24px;
+   text-align: center;
+   line-height: 32px;
+}
+
+.weekTitle {
+   width: 300px;
+   display: inline-block;
+   line-height: 32px;
+}
+
+.summary-row {
+   width: 364px;
+   margin: 0px;
+}
+
+.row-day {
+   width: 150px;
+   display: inline-block;
+}
+
+.row-date {
+   width: 100px;
+   display: inline-block;
+}
+
+.row-worktime {
+   width: 100px;
+   display: inline-block;
+}
+
+.tally-row {
+   margin-top: 10px;
+   font-weight: bold;
 }
 
 .footer {
