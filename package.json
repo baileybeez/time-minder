@@ -8,6 +8,7 @@
    },
    "license": "GPL-3.0-only",
    "dependencies": {
+      "@fortawesome/fontawesome-free": "^5.15.3",
       "cookie-parser": "^1.4.5",
       "express": "^4.17.1",
       "express-session": "^1.17.1",
