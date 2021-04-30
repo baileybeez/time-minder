@@ -20,7 +20,7 @@ block content
          .empName Welcome, #{user.Name}
       
       .section   
-         .section-half
+         .section-sbs
             .title Time Card 
             .prevSegments 
                table
@@ -34,7 +34,7 @@ block content
                         td(colspan='2') Total Hours
                         td#workTally
       
-         .section-half
+         .section-sbs
             #clock
                #clockIn(class='clockControl')
                   .btn(action='clock-in') 
@@ -46,3 +46,12 @@ block content
                   .actionRow
                      input(type='text', id='segDesc', placeholder='task description (optional)')
                      .btn(action='apply-desc') Set
+      
+      .section
+         .summaryHeader
+            .weekOpt(action='prev-week')
+               i(class='fas fa-angle-left')
+            .weekTitle
+            .weekOpt(action='next-week')
+               i(class='fas fa-angle-right')
+         #weekSummary
