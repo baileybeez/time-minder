@@ -2,6 +2,12 @@
 node_modules
 yarn.lock
 
+# third party stuff
+fontawesome
+fa-solid-900.ttf
+fa-solid-900.woff
+fa-solid-900.woff2
+
 # imported libraries
 entity_framework
 

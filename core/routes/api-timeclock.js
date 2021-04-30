@@ -1,8 +1,10 @@
 const WorkSegment = require("../model/worksegment")
 
-function ApiRoutes(app, express, db) {
+const UserUtils = require('../utilities/user-utils')
+
+function Api_TimeClock_Routes(app, express, db) {
    express.post('/api/v1/clock-in', (request, response) => {
-      const usr = verifyAuthentication(app, request, response)
+      const usr = UserUtils.verifyAuthentication(app, request, response)
       if (usr == null)
          return
 
@@ -26,7 +28,7 @@ function ApiRoutes(app, express, db) {
    })
 
    express.post('/api/v1/clock-out', (request, response) => {
-      const usr = verifyAuthentication(app, request, response)
+      const usr = UserUtils.verifyAuthentication(app, request, response)
       if (usr == null)
          return
 
@@ -49,7 +51,7 @@ function ApiRoutes(app, express, db) {
 
    // ?segmentId=XX&description=XX
    express.post('/api/v1/apply-desc', (request, response) => {
-      const usr = verifyAuthentication(app, request, response)
+      const usr = UserUtils.verifyAuthentication(app, request, response)
       if (usr == null)
          return
 
@@ -88,13 +90,4 @@ function simpleReponse(ok, msg, seg = null) {
    return { ok: ok, msg: msg, ws: seg }
 }
 
-function verifyAuthentication(app, req, res) {
-   const user = app.getUserManager().get(req.session.userId || 0)
-   if (user == null) {
-      res.sendStatus(403)
-   } 
-
-   return user
-}
-
-module.exports = ApiRoutes
+module.exports = Api_TimeClock_Routes
